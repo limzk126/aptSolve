@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
-import Home from './components/home/home';
+import Header from './components/header';
+import RoutingPath from './components/routing/routingPath';
 
 function App() {
   return (
     <div>
-      <Home />
+      <Header />
+      <RoutingPath />
     </div>
   );
 }

@@ -1,8 +1,15 @@
 import React from 'react';
 import { AppBar, Typography, Toolbar, Box, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const navItems = ['HOME', 'CREATE'];
+  const navItems = [
+    { text: 'HOME', path: '/' },
+    {
+      text: 'CREATE',
+      path: '/create',
+    },
+  ];
 
   return (
     <AppBar component="nav">
@@ -16,8 +23,10 @@ const Header = () => {
         </Typography>
         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
           {navItems.map((item) => (
-            <Button key={item} sx={{ color: '#fff' }}>
-              {item}
+            <Button key={item.text} sx={{ color: '#fff' }}>
+              <Link to={item.path} style={{ color: '#fff' }}>
+                {item.text}
+              </Link>
             </Button>
           ))}
         </Box>

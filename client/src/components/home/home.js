@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Grow } from '@mui/material';
-import Problem from './problem/problem';
+import Problem from '../problem/problem';
 
 const Home = () => {
-  const numbers = [...Array(10000).keys()];
+  const numbers = [...Array(100).keys()];
   return (
     <Grow in>
       <Container>
