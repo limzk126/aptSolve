@@ -1,7 +1,8 @@
 import React from 'react';
+import ProblemForm from './problemForm/problemForm';
 
 const Create = () => {
-  return <div>HELLO WORLD</div>;
+  return <ProblemForm />;
 };
 
 export default Create;

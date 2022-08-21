@@ -12,7 +12,7 @@ const Header = () => {
   ];
 
   return (
-    <AppBar component="nav">
+    <AppBar component="nav" position="static">
       <Toolbar>
         <Typography
           variant="h6"
