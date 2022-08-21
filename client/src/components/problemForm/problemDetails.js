@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProblemDetails = () => {
+const ProblemDetails = (prop) => {
   return (
     <div className="">
       <div>
@@ -10,6 +10,8 @@ const ProblemDetails = () => {
         <input
           className="w-full block border-none rounded-lg mr-4 appearance-none py-3 px-3 bg-black placeholder-white-500 text-white"
           type="text"
+          value={prop.title}
+          onChange={prop.onTitleChanged}
         ></input>
       </div>
       <div className="flex flex-wrap mt-4">
@@ -20,6 +22,8 @@ const ProblemDetails = () => {
           <select
             className="block border-none w-full rounded-lg py-3 px-3 pr-8 bg-black placeholder-white-500 text-white"
             id="solved-yourself"
+            value={prop.yourself}
+            onChange={prop.onYourselfChanged}
           >
             <option>Yes</option>
             <option>No</option>
@@ -32,6 +36,8 @@ const ProblemDetails = () => {
           <select
             className="block border-none w-full rounded-lg py-3 px-3 pr-8 bg-black placeholder-white-500 text-white"
             id="solved-yourself"
+            value={prop.difficulty}
+            onChange={prop.onDifficultyChanged}
           >
             <option>Easy</option>
             <option>Medium</option>
