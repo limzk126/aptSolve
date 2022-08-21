@@ -14,7 +14,6 @@ const ProblemForm = () => {
   const [total, setTotal] = useState('');
   const [comments, setComments] = useState('');
 
-  console.log('Tabita swatoosh', difficulty);
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onDifficultyChanged = (e) => setDifficulty(e.target.value);
   const onYourselfChanged = (e) => setYourself(e.target.value);
@@ -46,6 +45,14 @@ const ProblemForm = () => {
           onTotalChanged={onTotalChanged}
         />
         <Comments comments={comments} onCommentsChanged={onCommentsChanged} />
+        <div className="flex justify-end mt-6">
+          <button
+            type="button"
+            className="bg-black text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900"
+          >
+            Create
+          </button>
+        </div>
       </form>
     </section>
   );
