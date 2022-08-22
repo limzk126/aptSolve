@@ -3,8 +3,12 @@ import { useState } from 'react';
 import ProblemDetails from './problemDetails';
 import TimeDetails from './timeDetails';
 import Comments from './comments';
+import { createProblem } from '../../reducers/problemReducer';
+import { useDispatch } from 'react-redux';
 
 const ProblemForm = () => {
+  const dispatch = useDispatch();
+
   const [title, setTitle] = useState('');
   const [difficulty, setDifficulty] = useState('');
   const [yourself, setYourself] = useState('');
@@ -23,9 +27,24 @@ const ProblemForm = () => {
   const onTotalChanged = (e) => setTotal(e.target.value);
   const onCommentsChanged = (e) => setComments(e.target.value);
 
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    const problem = {
+      title,
+      difficulty,
+      think: +think,
+      code: +code,
+      debug: +debug,
+      total: +total,
+      yourself,
+      comments,
+    };
+    console.log(problem, 'yoooo');
+    dispatch(createProblem(problem));
+  };
   return (
     <section className="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 mt-20">
-      <form className="">
+      <form onSubmit={onSubmitHandler}>
         <ProblemDetails
           title={title}
           onTitleChanged={onTitleChanged}
@@ -47,7 +66,7 @@ const ProblemForm = () => {
         <Comments comments={comments} onCommentsChanged={onCommentsChanged} />
         <div className="flex justify-end mt-6">
           <button
-            type="button"
+            type="submit"
             className="bg-black text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900"
           >
             Create

@@ -25,8 +25,8 @@ const ProblemDetails = (prop) => {
             value={prop.yourself}
             onChange={prop.onYourselfChanged}
           >
-            <option>Yes</option>
-            <option>No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
         </div>
         <div className="w-64">
