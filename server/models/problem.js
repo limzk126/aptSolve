@@ -6,6 +6,8 @@ const problemSchema = new mongoose.Schema({
   think: Number,
   code: Number,
   debug: Number,
+  total: Number,
+  yourself: Boolean, 
   comments: String,
 });
 
