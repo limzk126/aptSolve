@@ -2,9 +2,9 @@ const problemRouter = require('express').Router();
 const Problem = require('../models/problem');
 
 problemRouter.get('/', async (request, response) => {
-    const problems = await Problem.find({});
+  const problems = await Problem.find({});
 
-    return response.json(problems);
+  response.json(problems);
 });
 
 problemRouter.post('/', async (request, response) => {

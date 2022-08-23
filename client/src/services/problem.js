@@ -3,6 +3,7 @@ const baseUrl = '/api/problems';
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);
+  console.log("response", response);
   return response.data;
 };
 

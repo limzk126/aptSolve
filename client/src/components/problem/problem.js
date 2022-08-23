@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-key */
 import React, { useMemo } from 'react';
 import { useTable } from 'react-table';
-import problem from '../../services/problem';
-import problemService from '../../services/problem';
+import { useSelector } from 'react-redux';
 
 const Problem = () => {
+  const data = useSelector((state) => state.problem);
+  console.log('DAATAAAA', data);
   const columns = useMemo(
     () => [
       {
