@@ -36,6 +36,9 @@ const Problem = () => {
         Header: 'Comments',
         accessor: 'comments',
       },
+      {
+        Header: 'Actions',
+      }
     ],
     []
   );
@@ -84,7 +87,7 @@ const Problem = () => {
             return (
               <tr
                 {...row.getRowProps()}
-                className="border-b border-gray-200 hover:bg-purple-400"
+                className="border-b border-gray-200 hover:text-black hover:bg-purple-400"
               >
                 {row.cells.map((cell, idx) => (
                   <td
