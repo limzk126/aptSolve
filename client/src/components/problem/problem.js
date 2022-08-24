@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { useTable } from 'react-table';
 import { useSelector } from 'react-redux';
-import { PencilIcon, EyeIcon, TrashIcon } from '@heroicons/react/24/solid';
+import CommentModal from '../modals/commentModal';
 
 const Problem = () => {
   const data = useSelector((state) => state.problem);
@@ -38,7 +38,8 @@ const Problem = () => {
       },
       {
         Header: 'Actions',
-        Cell: () => {
+        Cell: ({ cell, row }) => {
+          console.log('cellllll', row.original.comments);
           return (
             <div className="text-white">
               <svg
@@ -111,8 +112,12 @@ const Problem = () => {
   }
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
+
+  let modal = document.getElementById('default-modal');
+  console.log(modal, 'qweqwqwe');
   return (
     <div className="bg-black shadow-md rounded my-6">
+      <CommentModal />
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
