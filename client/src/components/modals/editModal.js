@@ -1,7 +1,7 @@
 import React from 'react';
 import ProblemForm from '../problemForm/problemForm';
 
-const EditModal = ({ visible, onClose, isEdit }) => {
+const EditModal = ({ visible, onClose }) => {
   const handleOnClose = (e) => {
     if (e.target.id !== 'editContainer') return;
     onClose();
