@@ -1,14 +1,11 @@
 import React from 'react';
-import { Container, Grow } from '@mui/material';
 import Problem from '../problem/problem';
 
 const Home = () => {
   return (
-    <Grow in>
-      <Container>
-        <Problem />
-      </Container>
-    </Grow>
+    <div className="min-w-screen min-h-screen bg-gray-100 flex justify-center bg-gray-100 font-sans overflow-hidden">
+      <Problem />
+    </div>
   );
 };
 
