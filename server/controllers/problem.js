@@ -25,7 +25,7 @@ problemRouter.put('/:id', async (request, response) => {
     }
   );
 
-  return response.status(200).json
+  return response.status(200).json(updatedProblem);
 });
 
 module.exports = problemRouter;
