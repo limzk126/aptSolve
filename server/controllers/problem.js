@@ -16,4 +16,16 @@ problemRouter.post('/', async (request, response) => {
   response.status(201).json(newProblem);
 });
 
+problemRouter.put('/:id', async (request, response) => {
+  const updatedProblem = await Problem.findByIdAndUpdate(
+    request.params.id,
+    request.body,
+    {
+      new: true,
+    }
+  );
+
+  return response.status(200).json
+});
+
 module.exports = problemRouter;
