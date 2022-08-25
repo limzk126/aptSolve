@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import ProblemDetails from './problemDetails';
 import TimeDetails from './timeDetails';
 import Comments from './comments';
-import { createProblem } from '../../reducers/problemReducer';
+import { createProblem, updateProblem } from '../../reducers/problemReducer';
 import { useDispatch, useSelector } from 'react-redux';
 
 const ProblemForm = ({ textColor, isEdit }) => {
@@ -53,7 +53,13 @@ const ProblemForm = ({ textColor, isEdit }) => {
       yourself,
       comments,
     };
-    dispatch(createProblem(problem));
+    if (isEdit) {
+      console.log(difficulty);
+      problem.id = selectedProblem.id;
+      dispatch(updateProblem(problem));
+    } else {
+      dispatch(createProblem(problem));
+    }
   };
   return (
     <form onSubmit={onSubmitHandler}>

@@ -3,7 +3,7 @@ const baseUrl = '/api/problems';
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);
-  console.log("response", response);
+  console.log('response', response);
   return response.data;
 };
 
@@ -12,4 +12,12 @@ const create = async (newProblem) => {
   return response.data;
 };
 
-export default { getAll, create };
+const update = async (modifiedProblem) => {
+  const response = await axios.put(
+    `${baseUrl}/${modifiedProblem.id}`,
+    modifiedProblem
+  );
+  return response.data;
+};
+
+export default { getAll, create, update };
