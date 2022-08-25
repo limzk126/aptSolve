@@ -1,11 +1,14 @@
 /* eslint-disable react/jsx-key */
-import React, { useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTable } from 'react-table';
 import { useSelector } from 'react-redux';
 import CommentModal from '../modals/commentModal';
 
 const Problem = () => {
   const data = useSelector((state) => state.problem);
+  const [commentVisible, setCommentVisible] = useState(false);
+  const [comments, setComments] = useState('');
+
   const columns = useMemo(
     () => [
       {
@@ -34,7 +37,31 @@ const Problem = () => {
       },
       {
         Header: 'Comments',
-        accessor: 'comments',
+        Cell: ({ cell, row }) => {
+          const comments = row.original.comments;
+          return (
+            <div className="text-white flex justify-center">
+              <svg
+                onClick={() => {
+                  setComments(comments);
+                  setCommentVisible(true);
+                }}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 hover:text-black"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+                />
+              </svg>
+            </div>
+          );
+        },
       },
       {
         Header: 'Actions',
@@ -113,54 +140,58 @@ const Problem = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
-  let modal = document.getElementById('default-modal');
-  console.log(modal, 'qweqwqwe');
   return (
-    <div className="bg-black shadow-md rounded my-6">
-      <CommentModal />
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr
-              {...headerGroup.getHeaderGroupProps()}
-              className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
-            >
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps()}
-                  className="py-3 px-6 text-left"
-                >
-                  {column.render('Header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody
-          {...getTableBodyProps()}
-          className="text-white text-sm font-medium"
-        >
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
+    <>
+      <CommentModal
+        visible={commentVisible}
+        content={comments}
+        onClose={() => setCommentVisible(false)}
+      />
+      <div className="bg-black shadow-md rounded my-6">
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
               <tr
-                {...row.getRowProps()}
-                className="border-b border-gray-200 hover:text-black hover:bg-purple-400"
+                {...headerGroup.getHeaderGroupProps()}
+                className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
               >
-                {row.cells.map((cell, idx) => (
-                  <td
-                    {...cell.getCellProps()}
-                    className="py-3 px-6 text-left whitespace-nowrap"
+                {headerGroup.headers.map((column) => (
+                  <th
+                    {...column.getHeaderProps()}
+                    className="py-3 px-6 text-left"
                   >
-                    {cell.render('Cell')}
-                  </td>
+                    {column.render('Header')}
+                  </th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+            ))}
+          </thead>
+          <tbody
+            {...getTableBodyProps()}
+            className="text-white text-sm font-medium"
+          >
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  className="border-b border-gray-200 hover:text-black hover:bg-purple-400"
+                >
+                  {row.cells.map((cell, idx) => (
+                    <td
+                      {...cell.getCellProps()}
+                      className="py-3 px-6 text-left whitespace-nowrap"
+                    >
+                      {cell.render('Cell')}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
