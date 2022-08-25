@@ -1,13 +1,16 @@
 /* eslint-disable react/jsx-key */
 import React, { useState, useMemo } from 'react';
 import { useTable } from 'react-table';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CommentModal from '../modals/commentModal';
+import EditModal from '../modals/editModal';
+import { setSelectedProblem } from '../../reducers/selectedProblemReducer';
 
 const Problem = () => {
+  const dispatch = useDispatch();
   const data = useSelector((state) => state.problem);
-  const [commentVisible, setCommentVisible] = useState(false);
-  const [comments, setComments] = useState('');
+  const [commentsVisible, setCommentsVisible] = useState(false);
+  const [editVisible, setEditVisible] = useState(false);
 
   const columns = useMemo(
     () => [
@@ -38,13 +41,13 @@ const Problem = () => {
       {
         Header: 'Comments',
         Cell: ({ cell, row }) => {
-          const comments = row.original.comments;
+          console.log(row);
           return (
             <div className="text-white flex justify-center">
               <svg
                 onClick={() => {
-                  setComments(comments);
-                  setCommentVisible(true);
+                  dispatch(setSelectedProblem(row.original));
+                  setCommentsVisible(true);
                 }}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -66,10 +69,13 @@ const Problem = () => {
       {
         Header: 'Actions',
         Cell: ({ cell, row }) => {
-          console.log('cellllll', row.original.comments);
           return (
             <div className="text-white">
               <svg
+                onClick={() => {
+                  dispatch(setSelectedProblem(row.original));
+                  setEditVisible(true);
+                }}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -143,9 +149,13 @@ const Problem = () => {
   return (
     <>
       <CommentModal
-        visible={commentVisible}
-        content={comments}
-        onClose={() => setCommentVisible(false)}
+        visible={commentsVisible}
+        onClose={() => setCommentsVisible(false)}
+      />
+      <EditModal
+        visible={editVisible}
+        onClose={() => setEditVisible(false)}
+        isEdit={true}
       />
       <div className="bg-black shadow-md rounded my-6">
         <table {...getTableProps()}>

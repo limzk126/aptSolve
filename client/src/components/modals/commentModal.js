@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const CommentModal = ({ visible, onClose, content }) => {
+const CommentModal = ({ visible, onClose }) => {
+  const selectedProblem = useSelector((state) => state.selectedProblem);
+  
   const handleOnClose = (e) => {
     if (e.target.id !== 'container') return;
     onClose();
@@ -12,7 +15,7 @@ const CommentModal = ({ visible, onClose, content }) => {
       id="container"
       className="fixed inset-0 flex justify-center items-center"
     >
-      <div className="bg-white p-2 rounded">{content}</div>
+      <div className="bg-white p-2 rounded">{selectedProblem.comments}</div>
     </div>
   );
 };

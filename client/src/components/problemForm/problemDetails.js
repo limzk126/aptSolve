@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProblemDetails = (prop) => {
   return (
-    <div className="">
+    <div>
       <div>
         <label className={`block mr-4 ${prop.textColor} dark:text-gray-200`}>
           Problem title

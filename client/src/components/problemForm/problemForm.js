@@ -1,13 +1,14 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProblemDetails from './problemDetails';
 import TimeDetails from './timeDetails';
 import Comments from './comments';
 import { createProblem } from '../../reducers/problemReducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-const ProblemForm = ({ textColor }) => {
+const ProblemForm = ({ textColor, isEdit }) => {
   const dispatch = useDispatch();
+  const selectedProblem = useSelector((state) => state.selectedProblem);
 
   const [title, setTitle] = useState('');
   const [difficulty, setDifficulty] = useState('');
@@ -17,6 +18,19 @@ const ProblemForm = ({ textColor }) => {
   const [debug, setDebug] = useState('');
   const [total, setTotal] = useState('');
   const [comments, setComments] = useState('');
+
+  useEffect(() => {
+    if (!isEdit) return;
+
+    setTitle(selectedProblem.title);
+    setDifficulty(selectedProblem.difficulty);
+    setYourself(selectedProblem.yourself);
+    setThink(selectedProblem.think);
+    setCode(selectedProblem.code);
+    setDebug(selectedProblem.debug);
+    setTotal(selectedProblem.total);
+    setComments(selectedProblem.comments);
+  }, []);
 
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onDifficultyChanged = (e) => setDifficulty(e.target.value);
@@ -39,7 +53,6 @@ const ProblemForm = ({ textColor }) => {
       yourself,
       comments,
     };
-    console.log(problem, 'yoooo');
     dispatch(createProblem(problem));
   };
   return (
@@ -52,6 +65,7 @@ const ProblemForm = ({ textColor }) => {
         yourself={yourself}
         onYourselfChanged={onYourselfChanged}
         textColor={textColor}
+        isEdit={isEdit}
       />
       <TimeDetails
         think={think}
@@ -63,11 +77,13 @@ const ProblemForm = ({ textColor }) => {
         total={total}
         onTotalChanged={onTotalChanged}
         textColor={textColor}
+        isEdit={isEdit}
       />
       <Comments
         comments={comments}
         onCommentsChanged={onCommentsChanged}
         textColor={textColor}
+        isEdit={isEdit}
       />
       <div className="flex justify-end mt-6">
         <button
