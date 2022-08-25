@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const problemSchema = new mongoose.Schema({
   title: String,
-  Difficulty: String,
+  difficulty: String,
   think: Number,
   code: Number,
   debug: Number,
