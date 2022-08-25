@@ -4,7 +4,7 @@ const TimeDetails = (prop) => {
   return (
     <div className="flex flex-wrap mt-4">
       <div className="w-48 mr-4">
-        <label className="block mr-4 text-white dark:text-gray-200">
+        <label className={`block mr-4 ${prop.textColor} dark:text-gray-200`}>
           Thinking time
         </label>
         <input
@@ -15,7 +15,7 @@ const TimeDetails = (prop) => {
         ></input>
       </div>
       <div className="w-48 mr-4">
-        <label className="block mr-4 text-white dark:text-gray-200">
+        <label className={`block mr-4 ${prop.textColor} dark:text-gray-200`}>
           Coding time
         </label>
         <input
@@ -26,7 +26,7 @@ const TimeDetails = (prop) => {
         ></input>
       </div>
       <div className="w-48 mr-4">
-        <label className="block mr-4 text-white dark:text-gray-200">
+        <label className={`block mr-4 ${prop.textColor} dark:text-gray-200`}>
           Debugging time
         </label>
         <input
@@ -37,7 +37,7 @@ const TimeDetails = (prop) => {
         ></input>
       </div>
       <div className="w-48">
-        <label className="block mr-4 text-white dark:text-gray-200">
+        <label className={`block mr-4 ${prop.textColor} dark:text-gray-200`}>
           Total time
         </label>
         <input
