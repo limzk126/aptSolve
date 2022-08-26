@@ -1,4 +1,3 @@
-import { CardActionArea } from '@mui/material';
 import { createSlice } from '@reduxjs/toolkit';
 import problemService from '../services/problem';
 
@@ -15,6 +14,11 @@ const problemSlice = createSlice({
     ammendProblem(state, action) {
       return state.map((problem) => {
         return problem.id === action.payload.id ? action.payload : problem;
+      });
+    },
+    removeProblem(state, action) {
+      return state.filter((problem) => {
+        return problem.id !== action.payload;
       });
     },
   },
@@ -41,5 +45,12 @@ export const updateProblem = (obj) => {
   };
 };
 
-export const { addProblem, setProblems, ammendProblem } = problemSlice.actions;
+export const deleteProblem = (id) => {
+  return async (dispatch) => {
+    dispatch(removeProblem(id));
+  };
+};
+
+export const { addProblem, setProblems, ammendProblem, removeProblem } =
+  problemSlice.actions;
 export default problemSlice.reducer;
