@@ -30,9 +30,10 @@ problemRouter.put('/:id', async (request, response) => {
 });
 
 problemRouter.delete('/:id', async (request, response) => {
-  await findByIdAndDelete(request.params.id);
-
-  return response.status(204).end();
-})
+  const deletedProblem = await Problem.findByIdAndDelete(request.params.id);
+  if (deletedProblem) {
+    return response.status(204).end();
+  }
+});
 
 module.exports = problemRouter;
