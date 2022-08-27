@@ -1,4 +1,5 @@
 const problemRouter = require('express').Router();
+const { findById, findByIdAndDelete } = require('../models/problem');
 const Problem = require('../models/problem');
 
 problemRouter.get('/', async (request, response) => {
@@ -27,5 +28,11 @@ problemRouter.put('/:id', async (request, response) => {
 
   return response.status(200).json(updatedProblem);
 });
+
+problemRouter.delete('/:id', async (request, response) => {
+  await findByIdAndDelete(request.params.id);
+
+  return response.status(204).end();
+})
 
 module.exports = problemRouter;
