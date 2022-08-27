@@ -6,7 +6,9 @@ require('express-async-errors');
 
 const config = require('./utils/config');
 const logger = require('./utils/logger');
+const loginRouter = require('./controllers/login');
 const problemRouter = require('./controllers/problem');
+const usersRouter = require('./controllers/user');
 const middleware = require('./utils/middleware');
 
 mongoose
@@ -20,10 +22,9 @@ mongoose
 
 app.use(cors());
 app.use(express.json());
-app.get('/', (request, response) => {
-  response.send('<h1>The server is running.</h1>');
-});
+app.use('/api/login', loginRouter);
 app.use('/api/problems', problemRouter);
+app.use('/api/users', usersRouter);
 app.use(middleware.errorHandler);
 
 module.exports = app;
