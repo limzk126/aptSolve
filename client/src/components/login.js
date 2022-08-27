@@ -1,12 +1,38 @@
 import React, { useState } from 'react';
+import loginService from '../services/login-service';
+import usersService from '../services/users-service';
+import problemService from '../services/problem';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {};
-  const handleSignup = () => {
+  const handleLogin = async () => {
+    try {
+      const user = await loginService.login({
+        username,
+        password,
+      });
+      window.localStorage.setItem('user', user);
+      problemService.setToken(user.token);
+      setUsername('');
+      setPassword('');
+      navigate('/problems');
+    } catch (error) {
+      console.log('wrong credentials', error);
+    }
+  };
+
+  const handleSignup = async () => {
+    await usersService.createUser({
+      username,
+      password,
+    });
+    setUsername('');
+    setPassword('');
   };
 
   return (
