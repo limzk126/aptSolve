@@ -20,4 +20,10 @@ const update = async (modifiedProblem) => {
   return response.data;
 };
 
-export default { getAll, create, update };
+const deleteProblem = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id}`);
+  console.log('RESPONSEEEE', response);
+  return response.data;
+};
+
+export default { getAll, create, update, deleteProblem };

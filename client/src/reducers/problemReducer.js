@@ -47,6 +47,7 @@ export const updateProblem = (obj) => {
 
 export const deleteProblem = (id) => {
   return async (dispatch) => {
+    await problemService.deleteProblem(id);
     dispatch(removeProblem(id));
   };
 };
