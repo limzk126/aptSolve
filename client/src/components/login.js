@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {};
+  const handleSignup = () => {
+  };
 
   return (
     <div className="flex bg-blue-200 w-full h-screen">
@@ -31,6 +37,8 @@ const Login = () => {
             </div>
             <input
               type="text"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
               className="border-0 rounded w-px flex-1 flex-shrink flex-grow relative self-center bg-white outline-none font-roboto text-xl"
               placeholder="username"
             ></input>
@@ -56,6 +64,8 @@ const Login = () => {
             </div>
             <input
               type="text"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
               className="flex-shrink flex-groW border-0 outline-none rounded w-px flex-1 self-center relative bg-white font-roboto text-xl"
               placeholder="password"
             ></input>
@@ -67,7 +77,11 @@ const Login = () => {
           >
             {isLogin ? 'Sign up' : 'Log in'}
           </a>
-          <button className="border-0 outline-none rounded p-1 bg-blue-400 text-white text-xl font-sans">
+          <button
+            type="button"
+            onClick={isLogin ? handleLogin : handleSignup}
+            className="border-0 outline-none rounded p-1 bg-blue-400 text-white text-xl font-sans"
+          >
             {isLogin ? 'Login' : 'Create Account'}
           </button>
         </form>
