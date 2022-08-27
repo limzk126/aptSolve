@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Login = () => {
+  const [isLogin, setIsLogin] = useState(true);
+
   return (
     <div className="flex bg-blue-200 w-full h-screen">
       <div className="flex flex-col ml-auto mr-auto items-center w-full h-auto lg:w-2/3 md:w-3/5">
-        <h1 className="font-bold text-2xl my-10 text-white">Login</h1>
+        <h1 className="font-bold text-2xl my-10 text-white">
+          {isLogin ? 'Login' : 'Sign up'}
+        </h1>
         <form className="mt-2 flex flex-col lg:w-1/3 w-8/12">
           <div className="flex flex-wrap items-stretch w-full relative h-15 bg-white rounded mb-6 pr-10">
             <div className="flex -mr-px justify-center w-15 p-2">
@@ -57,13 +61,14 @@ const Login = () => {
             ></input>
           </div>
           <a
-            href="/sign-up"
+            href="#"
+            onClick={() => setIsLogin(!isLogin)}
             className="text-base text-white text-right font-roboto leading-normal hover:underline mb-6"
           >
-            Sign Up
+            {isLogin ? 'Sign up' : 'Log in'}
           </a>
           <button className="border-0 outline-none rounded p-1 bg-blue-400 text-white text-xl font-sans">
-            Login
+            {isLogin ? 'Login' : 'Create Account'}
           </button>
         </form>
       </div>
