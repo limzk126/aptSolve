@@ -7,8 +7,12 @@ const problemSchema = new mongoose.Schema({
   code: Number,
   debug: Number,
   total: Number,
-  yourself: Boolean, 
+  yourself: Boolean,
   comments: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }
 });
 
 problemSchema.set('toJSON', {
