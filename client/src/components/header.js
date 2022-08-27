@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   const navItems = [
-    { text: 'HOME', path: '/' },
+    { text: 'HOME', path: '/problems' },
     {
       text: 'CREATE',
       path: '/create',

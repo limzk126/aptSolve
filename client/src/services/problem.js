@@ -22,7 +22,6 @@ const update = async (modifiedProblem) => {
 
 const deleteProblem = async (id) => {
   const response = await axios.delete(`${baseUrl}/${id}`);
-  console.log('RESPONSEEEE', response);
   return response.data;
 };
 
