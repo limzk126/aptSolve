@@ -11,8 +11,8 @@ const ProblemForm = ({ textColor, isEdit }) => {
   const selectedProblem = useSelector((state) => state.selectedProblem);
 
   const [title, setTitle] = useState('');
-  const [difficulty, setDifficulty] = useState('');
-  const [yourself, setYourself] = useState('');
+  const [difficulty, setDifficulty] = useState('Easy');
+  const [yourself, setYourself] = useState(true);
   const [think, setThink] = useState('');
   const [code, setCode] = useState('');
   const [debug, setDebug] = useState('');
