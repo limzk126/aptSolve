@@ -3,18 +3,36 @@ const { findById, findByIdAndDelete } = require('../models/problem');
 const Problem = require('../models/problem');
 
 problemRouter.get('/', async (request, response) => {
-  const problems = await Problem.find({});
-
+  if (!request.user) {
+    return response.status(401).json({ error: 'token missing or invalid' });
+  }
+  const problems = await Problem.find({ user: request.user.id }).populate(
+    'user',
+    { username: 1 }
+  );
   response.json(problems);
 });
 
 problemRouter.post('/', async (request, response) => {
+  if (!request.user) {
+    return response.status(401).json({ error: 'token missing or invalid' });
+  }
+
+  const user = request.user;
   const problem = new Problem({
     ...request.body,
+    user: user.id,
   });
 
-  const newProblem = await problem.save();
-  response.status(201).json(newProblem);
+  const savedProblem = await problem.save();
+  user.problems = user.problems.concat(savedProblem._id);
+  await user.save();
+
+  const problemToReturn = await Problem.find({
+    user: savedProblem.id,
+  }).populate('user', { username: 1 });
+
+  response.status(201).json(problemToReturn);
 });
 
 problemRouter.put('/:id', async (request, response) => {
@@ -24,7 +42,7 @@ problemRouter.put('/:id', async (request, response) => {
     {
       new: true,
     }
-  );
+  ).populate('user', { username: 1 });
 
   return response.status(200).json(updatedProblem);
 });
