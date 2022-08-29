@@ -31,16 +31,17 @@ const Problem = () => {
   }, []);
 
   useEffect(() => {
-    if (!effectTriggeredRef.current && allData && allData.length) {
+    if (!allData || !allData.length) return;
+
+    if (!effectTriggeredRef.current) {
       setData(allData.slice(0, 10));
       effectTriggeredRef.current = true;
+    } else {
+      setData(allData.slice(0, data.length));
     }
   }, [allData]);
 
   const deleteRow = (id) => () => {
-    setData((prev) => {
-      return prev.filter((problem) => problem.id !== id);
-    });
     dispatch(deleteProblem(id));
   };
 
