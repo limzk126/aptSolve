@@ -3,8 +3,11 @@ import loginService from '../services/login-service';
 import usersService from '../services/users-service';
 import problemService from '../services/problem';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { initializeProblems } from '../reducers/problemReducer';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
@@ -16,8 +19,9 @@ const Login = () => {
         username,
         password,
       });
-      window.localStorage.setItem('user', user);
+      window.localStorage.setItem('user', JSON.stringify(user));
       problemService.setToken(user.token);
+      dispatch(initializeProblems());
       setUsername('');
       setPassword('');
       navigate('/problems');

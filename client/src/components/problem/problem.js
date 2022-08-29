@@ -6,18 +6,32 @@ import CommentModal from '../modals/commentModal';
 import EditModal from '../modals/editModal';
 import { setSelectedProblem } from '../../reducers/selectedProblemReducer';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { deleteProblem } from '../../reducers/problemReducer';
+import {
+  deleteProblem,
+  initializeProblems,
+} from '../../reducers/problemReducer';
+import problemService from '../../services/problem';
 
 const Problem = () => {
   const dispatch = useDispatch();
-  const allData = useSelector((state) => state.problem);
+  let allData = useSelector((state) => state.problem);
   const [data, setData] = useState([]);
   const [commentsVisible, setCommentsVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const effectTriggeredRef = useRef(false);
 
   useEffect(() => {
-    if (!effectTriggeredRef.current && allData.length) {
+    if (!window.localStorage.getItem('user')) return;
+
+    const user = JSON.parse(window.localStorage.getItem('user'));
+    if (user.token) {
+      problemService.setToken(user.token);
+      dispatch(initializeProblems());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!effectTriggeredRef.current && allData && allData.length) {
       setData(allData.slice(0, 10));
       effectTriggeredRef.current = true;
     }
