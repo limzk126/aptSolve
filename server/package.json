@@ -2,9 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js", 
-  "start": { "postinstall": "cd server && npm install" },
+  "main": "index.js",
+  "start": {
+    "postinstall": "cd server && npm install"
+  },
   "scripts": {
+    "heroku-prebuild": "cd server && npm install",
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon --inspect index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
