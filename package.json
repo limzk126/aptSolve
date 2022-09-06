@@ -2,7 +2,7 @@
   "scripts": {
     "server": "npm run dev --prefix ./server",
     "client": "npm start --prefix client",
-    "build": "DISABLE_ESLINT_PLUGIN=true npm run --prefix client build && mv client/build server",
+    "build:client": "DISABLE_ESLINT_PLUGIN=true npm run --prefix client build && mv client/build server",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
