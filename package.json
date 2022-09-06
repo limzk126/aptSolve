@@ -1,5 +1,7 @@
 {
   "scripts": {
+    "postinstall": "cd server && npm install",
+    "heroku-prebuild": "cd server && npm install",
     "start": "node index.js --prefix server",
     "server": "npm run dev --prefix ./server",
     "client": "npm start --prefix client",
