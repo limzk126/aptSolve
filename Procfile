@@ -1,1 +1,1 @@
-web: NODE_ENV=production node index.js --prefix server
+web: NODE_ENV=production nodes index.js --prefix server
