@@ -20,6 +20,7 @@ mongoose
     logger.error('Failed to connect to MongoDB:', err);
   });
 
+app.use(express.static('build'));
 app.use(cors());
 app.use(express.json());
 app.use(middleware.userExtractor);
