@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "start": "NODE_ENV=production node index.js --prefix server",
+    "start": "node index.js --prefix server",
     "server": "npm run dev --prefix ./server",
     "client": "npm start --prefix client",
-    "build:client": "DISABLE_ESLINT_PLUGIN=true npm run --prefix client build && mv client/build server",
+    "build:client": "DISABLE_ESLINT_PLUGIN=true npm run --prefix client build && rm -rf server/build && mv client/build server",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
